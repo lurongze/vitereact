@@ -1,15 +1,28 @@
-import { Route, Routes } from 'react-router-dom';
-import Home from '@/layout/home';
-import Login from '@/layout/login';
-import Error404 from '@/layout/404';
+import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
+import { RecoilRoot } from 'recoil';
+import AppRoutes from '@/routes/index';
+
+function ErrorFallback({ error, resetErrorBoundary }: FallbackProps): JSX.Element {
+  return (
+    <div role="alert">
+      <p>Something went wrong:</p>
+      <pre>{error.message}</pre>
+      <button onClick={resetErrorBoundary}>Try again</button>
+    </div>
+  );
+}
+
+function handleResetApp(): void {
+  console.log('handleResetApp!');
+}
 
 function App() {
   return (
-    <Routes>
-      <Route path="/home/*" element={<Home />} data-name="首页" />
-      <Route path="/login" element={<Login />} data-name="登陆页" />
-      <Route path="*" element={<Error404 />} data-name="404页面" />
-    </Routes>
+    <ErrorBoundary FallbackComponent={ErrorFallback} onReset={handleResetApp}>
+      <RecoilRoot>
+        <AppRoutes />
+      </RecoilRoot>
+    </ErrorBoundary>
   );
 }
 

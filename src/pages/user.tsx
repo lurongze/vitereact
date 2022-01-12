@@ -1,12 +1,14 @@
 import { Button } from '@douyinfe/semi-ui';
-// import Button from '@douyinfe/semi-ui/button/index';
-// import '@douyinfe/semi-ui/button/index.less'
+
+import { useRecoilState } from 'recoil';
+import { loginUserInfoState, loginUserInfoType } from '@/models/global';
 
 function UserPage() {
+  const [loginUserInfo] = useRecoilState<loginUserInfoType>(loginUserInfoState);
   return (
     <div>
       <h1>UserPage</h1>
-      <Button>UserPage</Button>
+      <Button>UserPage{loginUserInfo.userName}</Button>
     </div>
   );
 }
