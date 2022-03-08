@@ -1,5 +1,3 @@
-import { Button } from '@douyinfe/semi-ui';
-
 import { useRecoilState } from 'recoil';
 import { loginUserInfoState, loginUserInfoType } from '@/models/global';
 
@@ -8,7 +6,7 @@ function UserPage() {
   return (
     <div>
       <h1>UserPage</h1>
-      <Button>UserPage{loginUserInfo.userName}</Button>
+      {loginUserInfo.userName}
     </div>
   );
 }

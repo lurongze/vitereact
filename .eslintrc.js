@@ -20,6 +20,7 @@ module.exports = {
   rules: {
     // 未使用变量
     'no-unused-vars': 2,
+    '@typescript-eslint/no-invalid-this': 0
     // 自定义你的规则
     // 'import/no-extraneous-dependencies': 'off',
     // 'react/react-in-jsx-scope': 'off',

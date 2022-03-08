@@ -1,11 +1,7 @@
-export default function Login() {
-  return (
-    <h1
-      onClick={() => {
-        localStorage.setItem('isLogin', '1');
-      }}
-    >
-      我是登陆页面，点击我登陆
-    </h1>
-  );
+import styles from './style/login.module.less';
+
+function Login() {
+  return <div className={styles['login-page']}>Login Page</div>;
 }
+
+export default Login;

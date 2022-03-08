@@ -1,9 +1,15 @@
 import { Navigate, RouteObject } from 'react-router-dom';
-import Home from '@/layout/home';
+import Layout from '@/layout/layout';
 import Login from '@/layout/login';
 import Error404 from '@/layout/404';
-import IndexPage from '@/pages/index';
-import UserPage from '@/pages/user';
+
+import { lazy } from 'react';
+
+function lazyLoad(path: string) {
+  const LoadComponent = lazy(() => import(path));
+  return <LoadComponent />;
+}
+
 let routes: RouteObject[] = [
   {
     path: '/', // 重定向首页
@@ -15,15 +21,20 @@ let routes: RouteObject[] = [
   },
   {
     path: '/home', // 首页
-    element: <Home />,
+    element: <Layout />,
     children: [
       {
         path: 'index', // 首页
-        element: <IndexPage />,
+        // element: <IndexPage />,
+        element: lazyLoad('../pages/index'),
       },
       {
         path: 'user', // 用户信息
-        element: <UserPage />,
+        element: lazyLoad('../pages/user'),
+      },
+      {
+        path: '*', // 404页面
+        element: <Error404 />,
       },
     ],
   },
